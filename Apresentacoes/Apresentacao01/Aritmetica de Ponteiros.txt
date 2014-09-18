@@ -1,0 +1,69 @@
+
+Linguagem C
+
+Aritmetica de Ponteiros
+
+
+Posição de memória.  
+– v[i] é igual a: *(v + i) 
+ 
+  Exemplo: 
+ 
+int x[] = {100,200,300,400}; /* x é a mesma coisa que &x[0] */ 
+
+*x = 100; // é o mesmo que x[0] = 100; 
+*(x+1) = 200; // é o mesmo que x[1] = 200; 
+*(x+2) = 300; // é o mesmo que x[2] = 300; 
+ 
+Podemos dizer que: 
+x[i] é o mesmo que *(x+i) 
+&x[i] é o mesmo que x+i 
+ 
+p++ p-- Incrementa/decrementa o ponteiro 
+ 
+- Para o tipo char, aumenta ou decrementa um; 
+- Para o tipo int, aumenta ou decrementa dois; 
+- Para o tipo float, aumenta ou decrementa quatro;
+
+Podemos utilizar os operadores relacionais para testar ou associar:  
+
+p == q Verifica se os ponteiros p e q apontam para a mesma área de memória 
+p = q O ponteiro da esquerda aponta para o mesmo local que o da direita 
+p != q O ponteiros apontam para locais diferentes
+> >= < <= Relaciona qual ponteiro aponta para a posic¸a~o mais alta 
+
+Assim como nas variáveis comuns, você pode realizar operações matemáticas com os endereços armazenados em ponteiros:
+		char* p; 
+		char c[5];
+		p = &c[0]; // p recebe o endereço do 1o c
+Ao incrementar o p, a linguagem Cidentifica primeiramente qual é o tipo do ponteiro. Daí, incrementa o endereço que ele contém, de acordo com o tamanho do seu tipo.
+		p++;
+Deste modo, você pode fazer um programa que preenche o vetor sem ter que utilizar a variável do vetor (variável c):
+
+        void main(void) 
+{
+          char* p; 
+          char c[5];
+          p = c;  // o mesmo que p = &c[0]
+          for(int cont=0;cont<5;cont++) {
+             *p = cont+1; // coloca cont+1 no local apontado por p
+               p++;  // passa para o endereço do próximo elemento 
+          }
+ }
+
+	OBS: o nome do vetor (sem o índice) contém o endereço do primeiro elemento dele!
+		
+Se a variável c fosse um vetor de inteiros, o p seria incrementado de dois em dois bytes:
+        void main(void) {
+          int* p; 
+          int c[5];
+          p = c;  // o mesmo que p = &c[0]
+          for(int cont=0;cont<5;cont++) {
+             *p = cont+1; // coloca cont+1 no local apontado por p
+               p++;  // passa para o endereço do próximo elemento 
+          }
+        }
+
+É por esse motivo que os ponteiros devem apontar para variáveis que sejam de um tipo igual ao seu. Caso contrário, ao serem incrementados ou decrementados, podem acabar apontando para o local errado: 
+char* p2 = &c[0];
+p2++;
